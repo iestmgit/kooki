@@ -21,17 +21,10 @@ function startClicking() {
     // هر ۱ میکروثانیه (۱ میلیون بار در ثانیه) کلیک کن
     clickInterval = setInterval(() => {
       if (currentTabId) {
-        chrome.scripting.executeScript({
-          target: { tabId: currentTabId },
-          func: () => {
-            // شبیه‌سازی کلیک چپ ماوس
-            document.dispatchEvent(new MouseEvent('click', {
-              view: window,
-              bubbles: true,
-              cancelable: true,
-              buttons: 1
-            }));
-          }
+        // ارسال پیام به content.js برای اجرای کلیک
+        chrome.tabs.sendMessage(currentTabId, { action: 'click' }).catch((error) => {
+          // اگر تب بسته شده یا خطایی رخ داد، کلیک رو متوقف کن
+          stopClicking();
         });
       }
     }, 0.001); // 0.001 میلی‌ثانیه = ۱ میکروثانیه
@@ -45,4 +38,5 @@ function stopClicking() {
   }
   isClicking = false;
   currentTabId = null;
+  console.log('Auto-clicker stopped');
 }
