@@ -2,6 +2,13 @@ let isClicking = false;
 let clickInterval = null;
 let currentTabId = null;
 
+// دریافت وضعیت برای popup
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'getStatus') {
+    sendResponse({ isClicking: isClicking });
+  }
+});
+
 chrome.commands.onCommand.addListener((command) => {
   if (command === "start-clicker") {
     if (isClicking) {
@@ -18,16 +25,13 @@ function startClicking() {
     currentTabId = tabs[0].id;
     isClicking = true;
 
-    // هر ۱ میکروثانیه (۱ میلیون بار در ثانیه) کلیک کن
     clickInterval = setInterval(() => {
       if (currentTabId) {
-        // ارسال پیام به content.js برای اجرای کلیک
-        chrome.tabs.sendMessage(currentTabId, { action: 'click' }).catch((error) => {
-          // اگر تب بسته شده یا خطایی رخ داد، کلیک رو متوقف کن
+        chrome.tabs.sendMessage(currentTabId, { action: 'click' }).catch(() => {
           stopClicking();
         });
       }
-    }, 0.001); // 0.001 میلی‌ثانیه = ۱ میکروثانیه
+    }, 0.001);
   });
 }
 
