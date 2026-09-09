@@ -1,4 +1,3 @@
-// content.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'click') {
     document.dispatchEvent(new MouseEvent('click', {
@@ -7,5 +6,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       cancelable: true,
       buttons: 1
     }));
+    sendResponse({ status: 'clicked' });
   }
 });
