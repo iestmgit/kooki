@@ -21,13 +21,18 @@ chrome.commands.onCommand.addListener((command) => {
 
 function startClicking() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs.length === 0) return;
+    if (tabs.length === 0) {
+      console.log('❌ تب فعالی پیدا نشد');
+      return;
+    }
     currentTabId = tabs[0].id;
     isClicking = true;
+    console.log('✅ شروع کلیک‌های خودکار در تب:', currentTabId);
 
     clickInterval = setInterval(() => {
       if (currentTabId) {
         chrome.tabs.sendMessage(currentTabId, { action: 'click' }).catch(() => {
+          console.log('⚠️ خطا در ارسال پیام، توقف کلیک‌ها');
           stopClicking();
         });
       }
@@ -42,5 +47,5 @@ function stopClicking() {
   }
   isClicking = false;
   currentTabId = null;
-  console.log('Auto-clicker stopped');
+  console.log('⏹️ کلیک‌های خودکار متوقف شد');
 }
