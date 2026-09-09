@@ -1,51 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="fa">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      width: 200px;
-      padding: 15px;
-      font-family: Arial, sans-serif;
+      width: 220px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 10px;
     }
-    h3 {
-      margin: 0 0 10px 0;
-      color: #333;
-    }
-    .status {
-      padding: 10px;
-      border-radius: 5px;
+    
+    .title {
+      font-size: 18px;
       font-weight: bold;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
-    .off {
-      background: #ff4444;
-      color: white;
+    
+    .status-container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(10px);
     }
-    .on {
-      background: #44bb44;
-      color: white;
+    
+    .status {
+      font-size: 16px;
+      font-weight: 600;
     }
+    
+    .status.off {
+      color: #ff6b6b;
+    }
+    
+    .status.on {
+      color: #51cf66;
+    }
+    
     .shortcut {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
+      font-size: 13px;
+      opacity: 0.9;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: inline-block;
     }
+    
     kbd {
-      background: #f0f0f0;
+      background: rgba(255, 255, 255, 0.25);
       padding: 2px 8px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      font-size: 11px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .emoji-big {
+      font-size: 28px;
     }
   </style>
 </head>
 <body>
-  <h3>🚀 Auto Clicker</h3>
-  <div id="status" class="status off">⏸️ متوقف</div>
-  <div class="shortcut">
-    کلیک با <kbd>Ctrl</kbd> + <kbd>Space</kbd>
+  <div class="title">
+    <span class="emoji-big">🖱️</span>
+    کلیک‌کننده خودکار
   </div>
   
+  <div class="status-container">
+    <div id="status" class="status off">⏸️ متوقف</div>
+  </div>
+  
+  <div class="shortcut">
+    <kbd>Ctrl</kbd> + <kbd>Space</kbd>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>
