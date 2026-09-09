@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ultra Auto Clicker",
+  "name": "کلیک‌کننده خودکار",
   "version": "1.0",
-  "description": "1,000,000 clicks per second with Ctrl+Space",
+  "description": "۱ میلیون کلیک در ثانیه با Ctrl+Space",
   "permissions": [
     "activeTab"
   ],
@@ -17,7 +17,7 @@
       "suggested_key": {
         "default": "Ctrl+Space"
       },
-      "description": "Start/Stop auto clicker"
+      "description": "شروع/توقف کلیک خودکار"
     }
   },
   "content_scripts": [
@@ -28,6 +28,6 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_title": "کلیک‌کننده خودکار"
   }
 }
